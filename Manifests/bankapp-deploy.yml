@@ -1,0 +1,70 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankapp
+  namespace: webapps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bankapp
+  template:
+    metadata:
+      labels:
+        app: bankapp
+    spec:
+      containers:
+        - name: bankapp
+          image: surajkhanderao/bankapp:v17
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "250Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-service:3306/bankappdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bankapp-service
+
+spec:
+  selector:
+    app: bankapp
+
+  ports:
+    - port: 80
+      targetPort: 8080
