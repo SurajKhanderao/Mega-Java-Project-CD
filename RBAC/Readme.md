@@ -47,7 +47,7 @@
    ```
 
 ### Generate token using service account in the namespace
----
+```
  apiVersion: v1
 kind: Secret
 metadata:
@@ -56,7 +56,7 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: my-sa
 type: kubernetes.io/service-account-token
-\
+```
 
 OR
 ---
