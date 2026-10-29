@@ -1,23 +1,26 @@
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-web-ingress
-  namespace: webapps
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - www.surajdevops.cv
+      secretName: bankapp-tls
+
   rules:
-    - host: bankapp.example.com
+    - host: www.surajdevops.cv
       http:
         paths:
-          - path: /nginx(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /
+            pathType: Prefix
             backend:
               service:
-                name: bankapp-service
+                name: ekart-svc
                 port:
                   number: 80
