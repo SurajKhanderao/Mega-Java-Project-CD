@@ -5,7 +5,6 @@
 
 
 ### Create secretstore.yaml ,(Note: Check NameSpace before creating)
-```
 ```yaml
 apiVersion: external-secrets.io/v1
 kind: SecretStore
