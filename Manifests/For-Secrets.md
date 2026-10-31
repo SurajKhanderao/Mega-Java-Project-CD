@@ -1,13 +1,11 @@
 
-### We will Create Secrets Automatically using ESO 
-    Which Retrieve The Secrets from AWS Secret Manager Using SecretStore and ExternnalSecret Objects
-    
-  
-# Note Check NameSpace before creating
+   ### We will Create Secrets Automatically using ESO(External Secret Oprator) 
+   ### ESO Retrieve The Secrets from AWS Secret Manager Using SecretStore and ExternnalSecret Objects
 
+
+
+### Create secretstore.yaml ,(Note: Check NameSpace before creating)
 ```
-### Create secretstore.yaml
-
 ```yaml
 apiVersion: external-secrets.io/v1
 kind: SecretStore
