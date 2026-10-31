@@ -1,6 +1,7 @@
-```
+
 ### We will Create Secrets Automatically using ESO 
-  Which Retrieve The Secrets from AWS Secret Manager Using SecretStore and ExternnalSecret Objects
+    Which Retrieve The Secrets from AWS Secret Manager Using SecretStore and ExternnalSecret Objects
+    
   
 # Note Check NameSpace before creating
 
