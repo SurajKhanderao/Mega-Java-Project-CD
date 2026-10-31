@@ -109,10 +109,9 @@ metadata:
   name: bankapp-service
   namespace: webapps
 spec:
-  type: LoadBalancer
   selector:
     app: bankapp
-```
   ports:
     - port: 80
       targetPort: 8080
+```
